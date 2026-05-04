@@ -76,11 +76,41 @@ function initGantt() {
     renderTimeline();
     renderTasks();
 
-    // Auto pan to roughly May 1st since April is just waiting period
     const scrollContainer = document.querySelector('.gantt-container-scroll');
     if (scrollContainer) {
-        const offsetPercent = ((new Date('2026-05-01T12:00:00') - START_DATE) / msPerDay) / totalDays;
-        scrollContainer.scrollLeft = scrollContainer.scrollWidth * offsetPercent - 100;
+        // Intro Animation
+        // Start scroll bar all the way to the left
+        scrollContainer.scrollLeft = 0;
+
+        // Wait 800ms before starting animation so user feels the UX 
+        setTimeout(() => {
+            const targetDate = new Date('2026-07-05T12:00:00');
+            const targetLeftPercent = (targetDate - START_DATE) / (END_DATE - START_DATE);
+            const scrollMax = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+            // Target is to pan over to the actual date flag
+            const targetScroll = Math.min((scrollContainer.scrollWidth * targetLeftPercent) - (scrollContainer.clientWidth / 2), scrollMax);
+
+            const duration = 2500;
+            const startTime = performance.now();
+            const startScroll = scrollContainer.scrollLeft;
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // easeInOutCubic for very smooth pan
+                const ease = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                scrollContainer.scrollLeft = startScroll + (targetScroll - startScroll) * ease;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            requestAnimationFrame(animate);
+        }, 800);
     }
 
     const depToggle = document.getElementById('dependencies-toggle');
@@ -101,7 +131,6 @@ function initGantt() {
         });
         resizeObserver.observe(document.getElementById('gantt-tasks'));
     } else {
-        // Fallback for older browsers
         setTimeout(renderDependencies, 500);
     }
 }
@@ -120,7 +149,6 @@ function renderTimeline() {
         const gridLine = document.createElement('div');
         gridLine.className = 'date-marker-line';
 
-        // Add milestone markers
         if (d.getMonth() === 4 && d.getDate() === 31) {
             gridLine.classList.add('milestone-marker-handoff');
         }
@@ -148,7 +176,16 @@ function renderTasks() {
 
         const headerLabel = document.createElement('div');
         headerLabel.className = 'task-label';
-        headerLabel.textContent = group.name + ' ▼';
+
+        const toggleBtn = document.createElement('span');
+        toggleBtn.className = 'expand-toggle';
+        toggleBtn.textContent = '▶';
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = group.name;
+
+        headerLabel.appendChild(toggleBtn);
+        headerLabel.appendChild(textSpan);
         headerRow.appendChild(headerLabel);
 
         const headerBars = document.createElement('div');

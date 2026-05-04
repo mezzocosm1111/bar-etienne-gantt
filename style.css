@@ -1,10 +1,17 @@
 :root {
-    --bg-color: #0B0E14;
-    --surface-color: #171A21;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --grid-line: #2A3143;
+    --bg-color: #E2E8F0;
+    /* lighter shades of grey */
+    --surface-color: #F8FAFC;
+    /* near white */
+    --header-bg: #282A31;
+    /* Skilljet style dark header */
+    --text-primary: #1E293B;
+    /* dark slate */
+    --text-secondary: #475569;
+    --grid-line: #CBD5E1;
 
+    --color-accent: #A3E635;
+    /* Neon lime green */
     --color-imminent: #FF5722;
     --color-coming-next: #FF9800;
     --color-next: #FFC107;
@@ -31,8 +38,8 @@ header {
     justify-content: space-between;
     align-items: flex-end;
     padding: 1.5rem 2.5rem;
-    background: linear-gradient(180deg, var(--surface-color) 0%, rgba(23, 26, 33, 0) 100%);
-    border-bottom: 1px solid var(--grid-line);
+    background-color: var(--header-bg);
+    border-bottom: 2px solid var(--color-accent);
 }
 
 .helvetica-title {
@@ -40,13 +47,11 @@ header {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, #ffffff, #a0aec0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FFF;
 }
 
 .project-info {
-    color: #cbd5e1;
+    color: #94A3B8;
     font-size: 0.8rem;
     line-height: 1.5;
     margin-top: 0.4rem;
@@ -57,10 +62,10 @@ header {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    background: rgba(42, 49, 67, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .toggle-switch {
@@ -83,7 +88,7 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #334155;
+    background-color: #475569;
     transition: .4s;
 }
 
@@ -100,7 +105,7 @@ header {
 }
 
 input:checked+.slider {
-    background-color: #3b82f6;
+    background-color: var(--color-accent);
 }
 
 input:checked+.slider:before {
@@ -120,7 +125,7 @@ input:checked+.slider:before {
     align-items: center;
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: #E2E8F0;
 }
 
 main {
@@ -156,9 +161,9 @@ main {
 .date-marker {
     flex: 1;
     text-align: center;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
     position: relative;
 }
 
@@ -168,12 +173,12 @@ main {
     top: 1.5rem;
     bottom: -4000px;
     width: 1px;
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(0, 0, 0, 0.05);
+    /* darker lines for light theme */
     z-index: 0;
     pointer-events: none;
 }
 
-/* Handoff and Finish Flags */
 .milestone-marker-handoff {
     background-image: linear-gradient(rgba(255, 152, 0, 0.4) 33%, rgba(255, 255, 255, 0) 0%);
     background-position: right;
@@ -197,7 +202,8 @@ main {
 
 .milestone-marker-finish {
     background-color: transparent !important;
-    border-left: 2px dashed #8BC34A;
+    border-left: 2px dashed #EF4444;
+    /* red final flag dashed */
     z-index: 10;
 }
 
@@ -238,9 +244,29 @@ main {
     position: relative;
 }
 
+/* Accordion toggles */
+.expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-accent);
+    color: #111;
+    border-radius: 4px;
+    font-weight: 900;
+    margin-right: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.6rem;
+}
+
+.task-group.expanded .expand-toggle {
+    transform: rotate(90deg);
+}
+
 .task-row.group-header {
     height: 28px;
-    background-color: rgba(30, 41, 59, 0.6);
+    background-color: #334155;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -248,23 +274,26 @@ main {
 }
 
 .task-row.group-header:hover {
-    background-color: rgba(30, 41, 59, 0.9);
+    background-color: #475569;
 }
 
 .task-row.group-header .task-label {
+    display: flex;
+    align-items: center;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: #F8FAFC;
 }
 
 .group-bar {
     position: absolute;
-    height: 6px;
-    top: 11px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 8px;
+    top: 10px;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(163, 230, 53, 0.5);
     pointer-events: none;
+    z-index: 6;
 }
 
 /* Sub tasks */
@@ -295,14 +324,15 @@ main {
 }
 
 .task-row.subtask .task-label {
-    padding-left: 1rem;
-    font-size: 0.7rem;
+    padding-left: 2rem;
+    font-style: italic;
+    font-size: 0.75rem;
     font-weight: 400;
-    color: #cbd5e1;
+    color: var(--text-secondary);
 }
 
 .task-row.subtask:hover .task-label {
-    color: #f8fafc;
+    color: var(--text-primary);
 }
 
 .task-label {
@@ -331,30 +361,32 @@ main {
     padding: 0 6px;
     font-size: 0.55rem;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255, 0.95);
+    /* text inside bars needs to be clear */
     cursor: pointer;
     transition: transform 0.1s, box-shadow 0.2s ease, filter 0.2s ease;
     z-index: 5;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     white-space: nowrap;
 }
 
-/* Dynamic Classes */
 .urgency-imminent {
-    background: linear-gradient(135deg, #FF7043, #FF5722);
+    background: linear-gradient(135deg, #FF7043, #F44336);
 }
 
 .urgency-coming-next {
-    background: linear-gradient(135deg, #FFB74D, #FF9800);
+    background: linear-gradient(135deg, #FFB74D, #FB8C00);
 }
 
 .urgency-next {
-    background: linear-gradient(135deg, #FFD54F, #FFC107);
+    background: linear-gradient(135deg, #FFD54F, #FFB300);
+    color: rgba(0, 0, 0, 0.85);
 }
 
 .urgency-final {
-    background: linear-gradient(135deg, #AED581, #8BC34A);
+    background: linear-gradient(135deg, #AED581, #7CB342);
+    color: rgba(0, 0, 0, 0.85);
 }
 
 .urgency-imminent:hover,
@@ -376,37 +408,43 @@ main {
 
 .dependency-line {
     fill: none;
-    stroke: #64748B;
+    stroke: #94A3B8;
     stroke-width: 1.5px;
-    opacity: 0.4;
+    opacity: 0.6;
     stroke-dasharray: 4;
 }
 
 .dependency-arrow {
-    fill: #64748B;
-    opacity: 0.5;
+    fill: #94A3B8;
+    opacity: 0.8;
 }
 
 .decision-icon {
-    font-size: 0.8rem;
-    margin-right: 2px;
+    font-size: 0.85rem;
+    margin-right: 4px;
+    color: #EF4444;
+    /* red icon */
 }
 
+/* Beautiful Scrollbar Requested */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 16px;
+    height: 16px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--surface-color);
+    background: var(--bg-color);
     border-radius: 8px;
+    border: 1px solid var(--grid-line);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--grid-line);
+    background: var(--text-secondary);
     border-radius: 8px;
+    border: 3px solid var(--bg-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: var(--color-accent);
+    border: 3px solid var(--bg-color);
 }
