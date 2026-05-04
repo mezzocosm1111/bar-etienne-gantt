@@ -2,78 +2,73 @@ const groups = [
     {
         name: 'Ordering & Decisions',
         tasks: [
-            { id: 'o1', name: 'Color Temp & Look Decision', start: '2026-05-04', end: '2026-05-07', urgency: 'imminent', decision: true },
-            { id: 'o2', name: 'Bathroom Floor Decision', start: '2026-05-04', end: '2026-05-08', urgency: 'imminent', decision: true },
-            { id: 'o3', name: 'Bar Tiled Border Decision', start: '2026-05-05', end: '2026-05-08', urgency: 'imminent', decision: true },
-            { id: 'o4', name: 'Order Central Mirror (5-day)', start: '2026-05-04', end: '2026-05-05', urgency: 'coming-next', decision: false },
-            { id: 'o5', name: 'Order Bathroom Sinks/Panels', start: '2026-05-04', end: '2026-05-06', urgency: 'coming-next', decision: false },
-            { id: 'o6', name: 'Order Black Formica', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false },
-            { id: 'o7', name: 'Order Zinc Bar Surface', start: '2026-04-14', end: '2026-04-15', urgency: 'coming-next', decision: false }, // started april 14
-            { id: 'o8', name: 'Order Bar Foot Rail', start: '2026-05-05', end: '2026-05-07', urgency: 'next', decision: false },
-            { id: 'o9', name: 'Order Stools, Hooks, Pedestals', start: '2026-05-06', end: '2026-05-09', urgency: 'next', decision: false },
-            { id: 'o10', name: 'Order Tables & Chairs', start: '2026-05-05', end: '2026-05-09', urgency: 'next', decision: false },
+            { id: 'o1', name: 'Color Temp & Look Decision', start: '2026-05-04', end: '2026-05-07', urgency: 'imminent', decision: true, deps: [] },
+            { id: 'o2', name: 'Bathroom Floor Decision', start: '2026-05-04', end: '2026-05-08', urgency: 'imminent', decision: true, deps: [] },
+            { id: 'o3', name: 'Bar Tiled Border Decision', start: '2026-05-05', end: '2026-05-08', urgency: 'imminent', decision: true, deps: [] },
+            { id: 'o4', name: 'Order Central Mirror', start: '2026-05-04', end: '2026-05-05', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'o5', name: 'Order Bath Sinks/Panels', start: '2026-05-04', end: '2026-05-06', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'o6', name: 'Order Black Formica', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'o7', name: 'Order Zinc Bar Surface', start: '2026-04-14', end: '2026-04-15', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'o8', name: 'Order Bar Foot Rail', start: '2026-05-05', end: '2026-05-06', urgency: 'next', decision: false, deps: [] }
         ]
     },
     {
         name: 'Ceiling & Lighting',
         tasks: [
-            { id: 'c1', name: 'Relocate Light Boxes (W. Wall)', start: '2026-05-04', end: '2026-05-05', urgency: 'imminent', decision: false },
-            { id: 'c2', name: 'Patch Ceiling Wire Holes', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false },
-            { id: 'c3', name: 'Install Tin Ceiling Brackets', start: '2026-05-06', end: '2026-05-08', urgency: 'coming-next', decision: false },
-            { id: 'c4', name: 'Install Tin Ceiling + Trims', start: '2026-05-09', end: '2026-05-12', urgency: 'next', decision: false },
-            { id: 'c5', name: 'Paint Primer on Tin Ceiling', start: '2026-05-13', end: '2026-05-14', urgency: 'next', decision: false },
-            { id: 'c6', name: 'Paint Final Color on Ceiling', start: '2026-05-15', end: '2026-05-17', urgency: 'next', decision: false },
-            { id: 'c7', name: 'Re-install Bar Crown Molding', start: '2026-05-18', end: '2026-05-19', urgency: 'final', decision: false },
+            { id: 'c1', name: 'Relocate Wall Boxes', start: '2026-05-04', end: '2026-05-05', urgency: 'imminent', decision: false, deps: [] },
+            { id: 'c2', name: 'Patch Ceiling Holes', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'c3', name: 'Install Tin Brackets', start: '2026-05-06', end: '2026-05-08', urgency: 'coming-next', decision: false, deps: ['c1'] },
+            { id: 'c4', name: 'Tin Ceiling + Trims', start: '2026-05-09', end: '2026-05-12', urgency: 'next', decision: false, deps: ['c3'] },
+            { id: 'c5', name: 'Primer on Ceiling', start: '2026-05-13', end: '2026-05-14', urgency: 'next', decision: false, deps: ['c4'] },
+            { id: 'c6', name: 'Final Color Ceiling', start: '2026-05-15', end: '2026-05-17', urgency: 'next', decision: false, deps: ['c5', 'o1'] },
+            { id: 'c7', name: 'Bar Crown Molding', start: '2026-05-18', end: '2026-05-19', urgency: 'final', decision: false, deps: ['c6'] },
         ]
     },
     {
-        name: 'Bathrooms (Priority Finish May 13)',
+        name: 'Bathrooms (Priority target May 13th)',
         tasks: [
-            { id: 'b1', name: 'Demolish Bathrooms Partially', start: '2026-05-04', end: '2026-05-06', urgency: 'imminent', decision: false },
-            { id: 'b2', name: 'Remove Doors & Prep Trim', start: '2026-05-06', end: '2026-05-08', urgency: 'coming-next', decision: false },
-            { id: 'b3', name: 'Install Black Formica', start: '2026-05-08', end: '2026-05-10', urgency: 'next', decision: false },
-            { id: 'b4', name: 'Paint Half-Height to Ceiling', start: '2026-05-08', end: '2026-05-11', urgency: 'next', decision: false },
-            { id: 'b5', name: 'Install SS Panels & Sinks', start: '2026-05-11', end: '2026-05-13', urgency: 'final', decision: false },
-            { id: 'b6', name: 'Replace Signs & Accessories', start: '2026-05-12', end: '2026-05-13', urgency: 'final', decision: false },
+            { id: 'b1', name: 'Demolish Bathrooms', start: '2026-05-04', end: '2026-05-06', urgency: 'imminent', decision: false, deps: [] },
+            { id: 'b2', name: 'Remove Doors/Trim', start: '2026-05-06', end: '2026-05-08', urgency: 'coming-next', decision: false, deps: ['b1'] },
+            { id: 'b3', name: 'Paint to Ceiling', start: '2026-05-08', end: '2026-05-10', urgency: 'next', decision: false, deps: ['b1'] },
+            { id: 'b4', name: 'Install Black Formica', start: '2026-05-11', end: '2026-05-12', urgency: 'next', decision: false, deps: ['b2', 'o6'] },
+            { id: 'b5', name: 'Install Panels/Sinks', start: '2026-05-12', end: '2026-05-14', urgency: 'final', decision: false, deps: ['b4', 'o5'] },
         ]
     },
     {
         name: 'Audio & Speakers',
         tasks: [
-            { id: 'a1', name: 'Lay Audio Wires on Ceiling', start: '2026-05-04', end: '2026-05-06', urgency: 'imminent', decision: false },
-            { id: 'a2', name: 'Build South Spkr Cab & Mesh', start: '2026-05-06', end: '2026-05-10', urgency: 'coming-next', decision: false },
-            { id: 'a3', name: 'Modify NW Cabinet & Face', start: '2026-05-06', end: '2026-05-09', urgency: 'coming-next', decision: false },
-            { id: 'a4', name: 'NE Angle & Bar L/R Shelves', start: '2026-05-07', end: '2026-05-10', urgency: 'coming-next', decision: false },
-            { id: 'a5', name: 'Install Amps in Bar Left Col.', start: '2026-05-11', end: '2026-05-13', urgency: 'next', decision: false },
+            { id: 'a1', name: 'Audio Wires Ceiling', start: '2026-05-04', end: '2026-05-06', urgency: 'imminent', decision: false, deps: [] },
+            { id: 'a2', name: 'South Spkr Cab & Mesh', start: '2026-05-06', end: '2026-05-09', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'a3', name: 'Modify NW Cabinet', start: '2026-05-06', end: '2026-05-09', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'a4', name: 'Install Left Col Amps', start: '2026-05-10', end: '2026-05-12', urgency: 'next', decision: false, deps: ['a1'] },
         ]
     },
     {
         name: 'The Bar',
         tasks: [
-            { id: 'bar1', name: 'Modify Radiator Cover', start: '2026-05-07', end: '2026-05-09', urgency: 'coming-next', decision: true },
-            { id: 'bar2', name: 'Install Central Mirror', start: '2026-05-10', end: '2026-05-11', urgency: 'next', decision: false },
-            { id: 'bar3', name: 'Modify Shelves (Central Bar)', start: '2026-05-12', end: '2026-05-14', urgency: 'next', decision: false },
-            { id: 'bar5', name: 'Install Tiles on Bar Footing', start: '2026-05-15', end: '2026-05-18', urgency: 'next', decision: false },
-            { id: 'bar6', name: 'Epoxy Grout Tiles', start: '2026-05-19', end: '2026-05-20', urgency: 'next', decision: false },
-            { id: 'bar7', name: 'Anchor Bar Foot Rail', start: '2026-05-21', end: '2026-05-22', urgency: 'final', decision: false },
-            { id: 'bar8', name: 'Clean, Sand, Osmo Bar Wood', start: '2026-05-23', end: '2026-05-26', urgency: 'final', decision: false },
-            { id: 'bar4', name: 'Install Zinc Surface & Gutter', start: '2026-06-08', end: '2026-06-11', urgency: 'final', decision: false }, // 8 weeks relative to April 14
+            { id: 'bar1', name: 'Modify Radiator Cover', start: '2026-05-07', end: '2026-05-09', urgency: 'coming-next', decision: true, deps: [] },
+            { id: 'bar2', name: 'Install Central Mirror', start: '2026-05-10', end: '2026-05-11', urgency: 'next', decision: false, deps: ['o4'] },
+            { id: 'bar3', name: 'Modify Shelves (Central)', start: '2026-05-12', end: '2026-05-14', urgency: 'next', decision: false, deps: ['bar2'] },
+            { id: 'bar4', name: 'Tiles on Bar Footing', start: '2026-05-15', end: '2026-05-18', urgency: 'next', decision: false, deps: ['o3'] },
+            { id: 'bar5', name: 'Epoxy Grout Tiles', start: '2026-05-19', end: '2026-05-20', urgency: 'next', decision: false, deps: ['bar4'] },
+            { id: 'bar6', name: 'Anchor Bar Foot Rail', start: '2026-05-21', end: '2026-05-22', urgency: 'final', decision: false, deps: ['bar5', 'o8'] },
+            { id: 'bar7', name: 'Clean/Osmo Bar Wood', start: '2026-05-23', end: '2026-05-26', urgency: 'final', decision: false, deps: ['bar6'] },
+            { id: 'bar8', name: 'Zinc Surface & Gutter', start: '2026-06-08', end: '2026-06-11', urgency: 'final', decision: false, deps: ['o7'] },
         ]
     },
     {
         name: 'Walls / Booths',
         tasks: [
-            { id: 'w1', name: 'Produce Missing Wainscotting', start: '2026-05-06', end: '2026-05-11', urgency: 'coming-next', decision: false },
-            { id: 'w2', name: 'Install Missing Wainscotting', start: '2026-05-12', end: '2026-05-14', urgency: 'next', decision: false },
-            { id: 'w3', name: 'Clean/Tint/Osmo Wainscotting', start: '2026-05-15', end: '2026-05-18', urgency: 'next', decision: false },
-            { id: 'w4', name: 'Install SW Booth Bench', start: '2026-05-19', end: '2026-05-21', urgency: 'final', decision: false },
-            { id: 'w5', name: 'Setup Under Bar Lighting', start: '2026-05-22', end: '2026-05-24', urgency: 'final', decision: false },
+            { id: 'w1', name: 'Produce Missing Wainscot', start: '2026-05-06', end: '2026-05-11', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'w2', name: 'Install Missing Wainscot', start: '2026-05-12', end: '2026-05-14', urgency: 'next', decision: false, deps: ['w1'] },
+            { id: 'w3', name: 'Clean/Osmo Wainscot', start: '2026-05-15', end: '2026-05-18', urgency: 'next', decision: false, deps: ['w2'] },
+            { id: 'w4', name: 'Install SW Booth Bench', start: '2026-05-19', end: '2026-05-21', urgency: 'final', decision: false, deps: ['w3'] },
         ]
     }
 ];
 
 const START_DATE = new Date('2026-04-14T12:00:00');
-const END_DATE = new Date('2026-07-06T12:00:00'); // Spans past opening date July 5th
+const END_DATE = new Date('2026-07-06T12:00:00');
 const msPerDay = 1000 * 60 * 60 * 24;
 const totalDays = Math.round((END_DATE - START_DATE) / msPerDay);
 
@@ -81,11 +76,33 @@ function initGantt() {
     renderTimeline();
     renderTasks();
 
-    // Automatically pan the Gantt chart to the current target work period roughly "May 1st"
+    // Auto pan to roughly May 1st since April is just waiting period
     const scrollContainer = document.querySelector('.gantt-container-scroll');
     if (scrollContainer) {
         const offsetPercent = ((new Date('2026-05-01T12:00:00') - START_DATE) / msPerDay) / totalDays;
         scrollContainer.scrollLeft = scrollContainer.scrollWidth * offsetPercent - 100;
+    }
+
+    const depToggle = document.getElementById('dependencies-toggle');
+    if (depToggle) {
+        depToggle.addEventListener('change', (e) => {
+            const lines = document.getElementById('dependency-lines');
+            lines.style.display = e.target.checked ? 'block' : 'none';
+            if (e.target.checked) renderDependencies();
+        });
+    }
+
+    // Resize observer allows dependency lines to redraw magically when accordions open/close
+    if (window.ResizeObserver) {
+        const resizeObserver = new ResizeObserver(() => {
+            if (depToggle && depToggle.checked) {
+                renderDependencies();
+            }
+        });
+        resizeObserver.observe(document.getElementById('gantt-tasks'));
+    } else {
+        // Fallback for older browsers
+        setTimeout(renderDependencies, 500);
     }
 }
 
@@ -95,15 +112,23 @@ function renderTimeline() {
         const d = new Date(START_DATE.getTime() + i * msPerDay);
         const marker = document.createElement('div');
         marker.className = 'date-marker';
-        // Only show label every few days or specifically skip to prevent visual clutter
+
         if (i % 3 === 0) {
             marker.textContent = `${d.getMonth() + 1}/${d.getDate()}`;
         }
 
         const gridLine = document.createElement('div');
         gridLine.className = 'date-marker-line';
-        marker.appendChild(gridLine);
 
+        // Add milestone markers
+        if (d.getMonth() === 4 && d.getDate() === 31) {
+            gridLine.classList.add('milestone-marker-handoff');
+        }
+        if (d.getMonth() === 6 && d.getDate() === 5) {
+            gridLine.classList.add('milestone-marker-finish');
+        }
+
+        marker.appendChild(gridLine);
         timelineEl.appendChild(marker);
     }
 }
@@ -113,15 +138,17 @@ function renderTasks() {
 
     groups.forEach((group) => {
         const groupEl = document.createElement('div');
-        groupEl.className = 'task-group';
+        groupEl.className = 'task-group expanded';
 
-        // --- Group Header ---
         const headerRow = document.createElement('div');
         headerRow.className = 'task-row group-header';
+        headerRow.onclick = () => {
+            groupEl.classList.toggle('expanded');
+        };
 
         const headerLabel = document.createElement('div');
         headerLabel.className = 'task-label';
-        headerLabel.textContent = group.name + ' ▼'; // Indicator of sub-tasks
+        headerLabel.textContent = group.name + ' ▼';
         headerRow.appendChild(headerLabel);
 
         const headerBars = document.createElement('div');
@@ -151,7 +178,6 @@ function renderTasks() {
         headerRow.appendChild(headerBars);
         groupEl.appendChild(headerRow);
 
-        // --- Sub Tasks ---
         const subTasksContainer = document.createElement('div');
         subTasksContainer.className = 'sub-tasks';
         const subTasksInner = document.createElement('div');
@@ -178,7 +204,6 @@ function renderTasks() {
 
             const offsetLeftDays = (tStart - START_DATE) / msPerDay;
             const durationDays = ((tEnd - tStart) / msPerDay) + 1;
-
             const offsetPercent = (offsetLeftDays / totalDays) * 100;
             const widthPercent = (durationDays / totalDays) * 100;
 
@@ -188,6 +213,7 @@ function renderTasks() {
             bar.style.left = `${offsetPercent}%`;
             bar.style.width = `${widthPercent}%`;
             bar.title = `${task.name}: ${task.start} to ${task.end}`;
+            bar.textContent = `${(tStart.getMonth() + 1)}/${tStart.getDate()} - ${task.name}`;
 
             barsContainer.appendChild(bar);
             row.appendChild(label);
@@ -199,6 +225,60 @@ function renderTasks() {
         groupEl.appendChild(subTasksContainer);
         tasksEl.appendChild(groupEl);
     });
+}
+
+function renderDependencies() {
+    const svg = document.getElementById('dependency-lines');
+    if (!svg) return;
+    svg.innerHTML = '';
+    const svgRect = svg.getBoundingClientRect();
+
+    groups.forEach(g => {
+        g.tasks.forEach(task => {
+            if (!task.deps || task.deps.length === 0) return;
+            const toBar = document.getElementById(`bar-${task.id}`);
+            if (!toBar) return;
+
+            task.deps.forEach(depId => {
+                const fromBar = document.getElementById(`bar-${depId}`);
+                if (!fromBar) return;
+
+                // If collapsed, height drops to 0, so skip drawing to prevent broken floating lines
+                if (fromBar.offsetHeight === 0 || toBar.offsetHeight === 0) return;
+
+                const fromRect = fromBar.getBoundingClientRect();
+                const toRect = toBar.getBoundingClientRect();
+
+                const startX = fromRect.right - svgRect.left;
+                const startY = fromRect.top + fromRect.height / 2 - svgRect.top;
+                const endX = toRect.left - svgRect.left;
+                const endY = toRect.top + toRect.height / 2 - svgRect.top;
+
+                drawDependencyCurve(svg, startX, startY, endX, endY);
+            });
+        });
+    });
+}
+
+function drawDependencyCurve(svg, x1, y1, x2, y2) {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'dependency-line');
+
+    const offset = Math.max(15, (x2 - x1) / 2);
+    let d = "";
+    if (x2 < x1 + 10) {
+        d = `M ${x1} ${y1} C ${x1 + 20} ${y1}, ${x1 + 20} ${y1 + (y2 - y1) / 2}, ${x1 - 10} ${y1 + (y2 - y1) / 2} C ${x2 - 20} ${y1 + (y2 - y1) / 2}, ${x2 - 20} ${y2}, ${x2 - 2} ${y2}`;
+    } else {
+        d = `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2 - 2} ${y2}`;
+    }
+
+    path.setAttribute('d', d);
+    svg.appendChild(path);
+
+    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    arrow.setAttribute('class', 'dependency-arrow');
+    arrow.setAttribute('points', `${x2},${y2} ${x2 - 6},${y2 - 4} ${x2 - 6},${y2 + 4}`);
+    svg.appendChild(arrow);
 }
 
 document.addEventListener('DOMContentLoaded', initGantt);

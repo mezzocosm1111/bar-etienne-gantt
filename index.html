@@ -14,20 +14,18 @@
     <header>
         <div class="header-content">
             <h1 class="helvetica-title">Bar Etienne</h1>
-            <p class="subtitle">Renovation Timeline - 600 sq ft</p>
             <p class="project-info">
-                Address: 44 Bedford Street, West Village, NY NY<br>
-                Target Handoff: End of May<br>
-                Final Opening: July 5th
+                Address: 44 Bedford Street, West Village, NY NY | 600 SQ FT approx<br>
+                Target Handoff: End of May | Final Opening: July 5th
             </p>
         </div>
         <div class="controls">
-            <span class="legend-item"><span class="legend-color" style="background:#ef4444;"></span> Decision
-                Required</span>
-            <span class="legend-item"><span class="legend-color urgency-imminent"
-                    style="width:12px;height:12px;border-radius:4px;"></span> Imminent</span>
-            <span class="legend-item"><span class="legend-color urgency-coming-next"
-                    style="width:12px;height:12px;border-radius:4px;"></span> Next up</span>
+            <label class="toggle-switch" title="Toggle Dependencies">
+                <input type="checkbox" id="dependencies-toggle" checked>
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label" style="font-size:0.8rem; margin-right:1rem;">Dependencies</span>
+            <span class="legend-item"><span class="decision-icon">❗️</span> Decisions</span>
         </div>
     </header>
     <main>
@@ -35,6 +33,7 @@
             <div class="gantt-wrapper">
                 <div id="gantt-timeline" class="gantt-timeline"></div>
                 <div id="gantt-tasks" class="gantt-tasks"></div>
+                <svg id="dependency-lines"></svg>
             </div>
         </div>
     </main>
