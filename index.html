@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,25 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <div class="header-content">
             <h1 class="helvetica-title">Bar Etienne</h1>
             <p class="subtitle">Renovation Timeline - 600 sq ft</p>
+            <p class="project-info">
+                Address: 44 Bedford Street, West Village, NY NY<br>
+                Target Handoff: End of May<br>
+                Final Opening: July 5th
+            </p>
         </div>
         <div class="controls">
-            <label class="toggle-switch" title="Toggle Dependencies">
-                <input type="checkbox" id="dependencies-toggle" checked>
-                <span class="slider round"></span>
-            </label>
-            <span class="toggle-label">Show Dependencies</span>
+            <span class="legend-item"><span class="legend-color" style="background:#ef4444;"></span> Decision
+                Required</span>
+            <span class="legend-item"><span class="legend-color urgency-imminent"
+                    style="width:12px;height:12px;border-radius:4px;"></span> Imminent</span>
+            <span class="legend-item"><span class="legend-color urgency-coming-next"
+                    style="width:12px;height:12px;border-radius:4px;"></span> Next up</span>
         </div>
     </header>
     <main>
@@ -27,10 +35,10 @@
             <div class="gantt-wrapper">
                 <div id="gantt-timeline" class="gantt-timeline"></div>
                 <div id="gantt-tasks" class="gantt-tasks"></div>
-                <svg id="dependency-lines"></svg>
             </div>
         </div>
     </main>
     <script src="main.js"></script>
 </body>
+
 </html>

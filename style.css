@@ -4,7 +4,7 @@
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --grid-line: #2A3143;
-    
+
     /* Requested UI colors */
     --color-imminent: #FF5722;
     --color-coming-next: #FF9800;
@@ -30,7 +30,7 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 2.5rem 4rem;
     background: linear-gradient(180deg, var(--surface-color) 0%, rgba(23, 26, 33, 0) 100%);
     border-bottom: 1px solid var(--grid-line);
@@ -53,79 +53,45 @@ header {
     font-weight: 300;
 }
 
-/* Material Toggle Switch with rounded aesthetic */
+.project-info {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-top: 0.8rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Legend items */
 .controls {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     background: rgba(42, 49, 67, 0.4);
     padding: 0.75rem 1.25rem;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 26px;
-}
-
-.toggle-switch input { 
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #334155;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-input:checked + .slider {
-    background-color: #3b82f6; /* Soft blue */
-}
-
-input:checked + .slider:before {
-    transform: translateX(22px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-.toggle-label {
-    font-size: 0.95rem;
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-secondary);
+}
+
+.legend-color {
+    display: inline-block;
+    width: 6px;
+    height: 16px;
+    border-radius: 2px;
 }
 
 /* Main Layout */
 main {
     flex: 1;
-    padding: 3rem 4rem;
+    padding: 2rem 4rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -142,7 +108,8 @@ main {
 
 .gantt-wrapper {
     position: relative;
-    min-width: 1000px;
+    min-width: 1400px;
+    /* Gives enough width to stretch through July nicely */
     padding: 2rem;
 }
 
@@ -158,7 +125,7 @@ main {
 .date-marker {
     flex: 1;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-secondary);
     position: relative;
@@ -168,9 +135,10 @@ main {
     position: absolute;
     left: 50%;
     top: 2rem;
-    bottom: -1000px; /* extends down to the grid */
+    bottom: -3000px;
+    /* extends down to the grid */
     width: 1px;
-    background-color: rgba(255,255,255,0.03);
+    background-color: rgba(255, 255, 255, 0.03);
     z-index: 0;
     pointer-events: none;
 }
@@ -185,32 +153,103 @@ main {
     background-color: var(--grid-line);
 }
 
-/* Task Container */
+/* Tasks */
 .gantt-tasks {
     position: relative;
     margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 0.5rem;
     z-index: 2;
+}
+
+.task-group {
+    margin-bottom: 0.25rem;
 }
 
 .task-row {
     display: flex;
     align-items: center;
-    height: 44px;
     position: relative;
 }
 
+/* Group Headers */
+.task-row.group-header {
+    height: 44px;
+    background-color: rgba(30, 41, 59, 0.4);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.task-row.group-header:hover {
+    background-color: rgba(30, 41, 59, 0.8);
+}
+
+.task-row.group-header .task-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.group-bar {
+    position: absolute;
+    height: 8px;
+    top: 18px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+/* Sub tasks */
+.sub-tasks {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sub-tasks-inner {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.task-group:hover .sub-tasks {
+    grid-template-rows: 1fr;
+}
+
+.task-group:hover .sub-tasks-inner {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.task-row.subtask {
+    height: 32px;
+}
+
+.task-row.subtask .task-label {
+    padding-left: 1.25rem;
+    font-size: 0.75rem;
+    /* Reduced to fit */
+    font-weight: 400;
+    color: #94a3b8;
+}
+
+.task-row.subtask:hover .task-label {
+    color: #f8fafc;
+}
+
+/* Labels and Container */
 .task-label {
     width: 220px;
     padding-right: 1.5rem;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--text-primary);
+    padding-left: 0.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.2s;
 }
 
 .task-bars-container {
@@ -221,92 +260,83 @@ main {
 
 .task-bar {
     position: absolute;
-    height: 34px;
-    top: 5px;
-    border-radius: 8px; /* Rounded pill aesthetic */
+    height: 24px;
+    top: 4px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    font-size: 0.8rem;
+    padding: 0 10px;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: rgba(0,0,0,0.85); /* Readability contrast */
+    color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, filter 0.2s ease;
     z-index: 5;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    white-space: nowrap;
 }
 
 /* Dynamic Classes requested by User */
 .urgency-imminent {
     background: linear-gradient(135deg, #FF7043, #FF5722);
-    box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.3);
 }
+
 .urgency-imminent:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255, 87, 34, 0.7), 0 6px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(255, 87, 34, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .urgency-coming-next {
     background: linear-gradient(135deg, #FFB74D, #FF9800);
 }
+
 .urgency-coming-next:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255, 152, 0, 0.5), 0 6px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .urgency-next {
     background: linear-gradient(135deg, #FFD54F, #FFC107);
 }
+
 .urgency-next:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255, 193, 7, 0.5), 0 6px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .urgency-final {
     background: linear-gradient(135deg, #AED581, #8BC34A);
 }
+
 .urgency-final:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(139, 195, 74, 0.5), 0 6px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(139, 195, 74, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-#dependency-lines {
-    position: absolute;
-    top: 2rem;
-    left: 220px;
-    width: calc(100% - 220px);
-    height: calc(100% - 2rem);
-    pointer-events: none;
-    z-index: 10;
-}
-
-.dependency-line {
-    fill: none;
-    stroke: #64748B;
-    stroke-width: 2px;
-    opacity: 0.5;
-    stroke-dasharray: 4;
-}
-
-.dependency-arrow {
-    fill: #64748B;
-    opacity: 0.7;
+/* Emoji flag */
+.decision-icon {
+    font-size: 0.9rem;
+    margin-right: 4px;
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--surface-color);
-    border-radius: 12px;
+    border-radius: 8px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--grid-line);
-    border-radius: 12px;
+    border-radius: 8px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: #475569;
 }
