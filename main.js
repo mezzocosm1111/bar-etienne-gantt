@@ -64,6 +64,17 @@ const groups = [
             { id: 'w3', name: 'Clean/Osmo Wainscot', start: '2026-05-15', end: '2026-05-18', urgency: 'next', decision: false, deps: ['w2'] },
             { id: 'w4', name: 'Install SW Booth Bench', start: '2026-05-19', end: '2026-05-21', urgency: 'final', decision: false, deps: ['w3'] },
         ]
+    },
+    {
+        name: 'Exterior & Signage',
+        tasks: [
+            { id: 'e1', name: 'Signage & Awning Concepts', start: '2026-05-06', end: '2026-05-10', urgency: 'coming-next', decision: true, deps: [] },
+            { id: 'e2', name: 'Order Awnings & Menu Box', start: '2026-05-11', end: '2026-05-13', urgency: 'next', decision: false, deps: ['e1'] },
+            { id: 'e3', name: 'Exterior Trims Prep/Repair', start: '2026-05-25', end: '2026-05-30', urgency: 'next', decision: false, deps: [] },
+            { id: 'e4', name: 'Install Awnings', start: '2026-06-05', end: '2026-06-08', urgency: 'final', decision: false, deps: ['e2', 'e3'] },
+            { id: 'e5', name: 'Install Menu Box & Signage', start: '2026-06-15', end: '2026-06-18', urgency: 'final', decision: false, deps: ['e4'] },
+            { id: 'e6', name: 'Outdoor Lighting Install', start: '2026-06-19', end: '2026-06-22', urgency: 'final', decision: false, deps: ['e5'] }
+        ]
     }
 ];
 
