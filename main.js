@@ -16,7 +16,7 @@ const groups = [
         name: 'Ceiling & Lighting',
         tasks: [
             { id: 'c1', name: 'Relocate Wall Boxes', start: '2026-05-04', end: '2026-05-05', urgency: 'imminent', decision: false, deps: [] },
-            { id: 'c2', name: 'Patch Ceiling Holes', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false, deps: [] },
+            { id: 'c2', name: 'Patch West Wall Holes', start: '2026-05-05', end: '2026-05-06', urgency: 'coming-next', decision: false, deps: [] },
             { id: 'c3', name: 'Install Tin Brackets', start: '2026-05-06', end: '2026-05-08', urgency: 'coming-next', decision: false, deps: ['c1'] },
             { id: 'c4', name: 'Tin Ceiling + Trims', start: '2026-05-09', end: '2026-05-12', urgency: 'next', decision: false, deps: ['c3'] },
             { id: 'c5', name: 'Primer on Ceiling', start: '2026-05-13', end: '2026-05-14', urgency: 'next', decision: false, deps: ['c4'] },

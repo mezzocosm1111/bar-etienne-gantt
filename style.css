@@ -1,14 +1,14 @@
 :root {
-    --bg-color: #E2E8F0;
-    /* lighter shades of grey */
-    --surface-color: #F8FAFC;
-    /* near white */
-    --header-bg: #282A31;
-    /* Skilljet style dark header */
-    --text-primary: #1E293B;
-    /* dark slate */
-    --text-secondary: #475569;
-    --grid-line: #CBD5E1;
+    --bg-color: #D1D5DB;
+    /* body background */
+    --surface-color: #E8EAED;
+    /* gantt surface */
+    --header-bg: #2D323E;
+    /* slightly darker header per request */
+    --text-primary: #374151;
+    /* slate text */
+    --text-secondary: #6B7280;
+    --grid-line: #C7CBD1;
 
     --color-accent: #A3E635;
     /* Neon lime green */
@@ -25,10 +25,14 @@
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+    font-weight: 300;
     background-color: var(--bg-color);
     color: var(--text-primary);
-    min-height: 100vh;
+    height: 100vh;
+    /* Fixed height locks the app size to the screen */
+    overflow: hidden;
+    /* Prohibits body scroll so internal div scrolls */
     display: flex;
     flex-direction: column;
 }
@@ -43,19 +47,19 @@ header {
 }
 
 .helvetica-title {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 400;
     letter-spacing: -0.5px;
-    color: #FFF;
+    color: #E2E8F0;
 }
 
 .project-info {
-    color: #94A3B8;
+    color: #A1A7B3;
+    /* low contrast */
     font-size: 0.8rem;
     line-height: 1.5;
     margin-top: 0.4rem;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
 }
 
 .controls {
@@ -124,7 +128,7 @@ input:checked+.slider:before {
     display: flex;
     align-items: center;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 300;
     color: #E2E8F0;
 }
 
@@ -139,7 +143,8 @@ main {
 .gantt-container-scroll {
     flex: 1;
     overflow: auto;
-    border-radius: 12px;
+    /* Contains the horizontal scrollbar perfectly here! */
+    border-radius: 6px;
     border: 1px solid var(--grid-line);
     background-color: var(--surface-color);
 }
@@ -162,7 +167,7 @@ main {
     flex: 1;
     text-align: center;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-primary);
     position: relative;
 }
@@ -196,7 +201,7 @@ main {
     left: -32px;
     color: #FF9800;
     font-size: 0.65rem;
-    font-weight: bold;
+    font-weight: 400;
     white-space: nowrap;
 }
 
@@ -254,7 +259,7 @@ main {
     background-color: var(--color-accent);
     color: #111;
     border-radius: 4px;
-    font-weight: 900;
+    font-weight: 400;
     margin-right: 8px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.6rem;
@@ -281,7 +286,7 @@ main {
     display: flex;
     align-items: center;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #F8FAFC;
 }
 
@@ -327,7 +332,7 @@ main {
     padding-left: 2rem;
     font-style: italic;
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 300;
     color: var(--text-secondary);
 }
 
@@ -360,7 +365,7 @@ main {
     align-items: center;
     padding: 0 6px;
     font-size: 0.55rem;
-    font-weight: 600;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.95);
     /* text inside bars needs to be clear */
     cursor: pointer;
@@ -433,7 +438,7 @@ main {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color);
+    background: var(--surface-color);
     border-radius: 8px;
     border: 1px solid var(--grid-line);
 }
@@ -441,10 +446,10 @@ main {
 ::-webkit-scrollbar-thumb {
     background: var(--text-secondary);
     border-radius: 8px;
-    border: 3px solid var(--bg-color);
+    border: 3px solid var(--surface-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-accent);
-    border: 3px solid var(--bg-color);
+    border: 3px solid var(--surface-color);
 }
