@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Etienne | Renovation Timeline</title>
+    <meta name="description" content="Gantt Timeline for the Bar Etienne renovation project.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="helvetica-title">Bar Etienne</h1>
+            <p class="subtitle">Renovation Timeline - 600 sq ft</p>
+        </div>
+        <div class="controls">
+            <label class="toggle-switch" title="Toggle Dependencies">
+                <input type="checkbox" id="dependencies-toggle" checked>
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">Show Dependencies</span>
+        </div>
+    </header>
+    <main>
+        <div class="gantt-container-scroll">
+            <div class="gantt-wrapper">
+                <div id="gantt-timeline" class="gantt-timeline"></div>
+                <div id="gantt-tasks" class="gantt-tasks"></div>
+                <svg id="dependency-lines"></svg>
+            </div>
+        </div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
